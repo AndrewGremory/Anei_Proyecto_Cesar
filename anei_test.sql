@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-08-2022 a las 21:17:37
+-- Tiempo de generación: 05-08-2022 a las 23:40:21
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.6
 
@@ -32,8 +32,8 @@ CREATE TABLE `liquidacion` (
   `PrecioFinal` int NOT NULL,
   `Id_Lote` int NOT NULL,
   `Id_Lote2` int DEFAULT NULL,
-  `ObservacionLote` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ObservacionLote` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Volcado de datos para la tabla `liquidacion`
@@ -54,9 +54,9 @@ INSERT INTO `liquidacion` (`Id_Liquidacion`, `PrecioFinal`, `Id_Lote`, `Id_Lote2
 
 CREATE TABLE `lote` (
   `Id_Lote` int NOT NULL,
-  `Nombre_Lote` varchar(50) NOT NULL,
+  `Nombre_Lote` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Municipio_Lote` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Volcado de datos para la tabla `lote`
@@ -85,7 +85,7 @@ INSERT INTO `lote` (`Id_Lote`, `Nombre_Lote`, `Municipio_Lote`) VALUES
 CREATE TABLE `municipios` (
   `Id_Municipio` int NOT NULL,
   `Nombre_Municipio` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Volcado de datos para la tabla `municipios`
@@ -106,15 +106,15 @@ INSERT INTO `municipios` (`Id_Municipio`, `Nombre_Municipio`) VALUES
 
 CREATE TABLE `productores` (
   `Codigo_Unidad_Productiva` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `Nombre_Finca` varchar(30) NOT NULL,
+  `Nombre_Finca` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Estatus` enum('Estandar','T1','T2','T3','Orgánico') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `Productor` varchar(100) NOT NULL,
+  `Productor` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Cedula` int NOT NULL,
   `Id_Municipio` int NOT NULL,
   `Id_Vereda` int NOT NULL,
   `Cupo_Cafe` int NOT NULL,
   `Cupo_Cacao` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Volcado de datos para la tabla `productores`
@@ -156,18 +156,18 @@ INSERT INTO `productores` (`Codigo_Unidad_Productiva`, `Nombre_Finca`, `Estatus`
 --
 
 CREATE TABLE `recibo` (
-  `Codigo_Recibo` varchar(100) NOT NULL,
-  `Id_Productor` varchar(20) NOT NULL,
+  `Codigo_Recibo` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Id_Productor` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Kilos_brutos` int NOT NULL,
   `Kilos_Netos` int NOT NULL,
   `Saco_Fique` int DEFAULT NULL,
   `Estopa` int DEFAULT NULL,
   `Id_Usuario` int NOT NULL,
-  `Estado_Analisis_Fisico` enum('Pendiente','Evaluado') NOT NULL DEFAULT 'Pendiente',
-  `Estado_Analisis_Sensorial` enum('Pendiente','Evaluado') NOT NULL DEFAULT 'Pendiente',
+  `Estado_Analisis_Fisico` enum('Pendiente','Evaluado') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Pendiente',
+  `Estado_Analisis_Sensorial` enum('Pendiente','Evaluado') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Pendiente',
   `Cupo_Disponible` int DEFAULT NULL,
   `Fijacion` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Volcado de datos para la tabla `recibo`
@@ -188,8 +188,8 @@ INSERT INTO `recibo` (`Codigo_Recibo`, `Id_Productor`, `Kilos_brutos`, `Kilos_Ne
 
 CREATE TABLE `rol` (
   `Id_Rol` int NOT NULL,
-  `Nombre_Rol` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Nombre_Rol` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Volcado de datos para la tabla `rol`
@@ -213,7 +213,7 @@ CREATE TABLE `usuarios` (
   `Nombre_Usuario` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Id_Rol` int NOT NULL,
   `Id_Municipio` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -231,8 +231,8 @@ INSERT INTO `usuarios` (`Id_Usuario`, `Nombre_Usuario`, `Id_Rol`, `Id_Municipio`
 
 CREATE TABLE `vereda` (
   `Id_Vereda` int NOT NULL,
-  `Nombre_Vereda` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Nombre_Vereda` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Volcado de datos para la tabla `vereda`
